@@ -1,3 +1,9 @@
+import CustomTable from "./components/Table";
+
 export default function Home() {
-  return <main className=""></main>;
+  return (
+    <main className="">
+      <CustomTable />
+    </main>
+  );
 }
