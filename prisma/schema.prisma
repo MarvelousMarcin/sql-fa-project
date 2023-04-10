@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DB_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+}
+
+model Address {
+  id            Int @id @default(autoincrement())
+  id_kraju      Int
+  wojewodztwo   String
+  kod_pocztowy  String
+  ulica         String
+  number_domu   Int
+  number_lokalu Int
+  powiat        String
+  kraj          County @relation(fields: [id_kraju], references: [id])
+}
+
+model County {
+  id        Int       @id @default(autoincrement())
+  kraj      String
+  kod_kraju String    @db.NVarChar(3) @unique
+  adresy    Address[]
+}
