@@ -108,6 +108,7 @@ export default function CustomTable() {
                   style={{
                     minWidth: column.minWidth,
                     backgroundColor: "#FFC300",
+                    fontFamily: "var(--font-merriweather)",
                   }}
                 >
                   <p className="font-bold">{column.label}</p>
@@ -132,7 +133,11 @@ export default function CustomTable() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          style={{ fontFamily: "var(--font-merriweather)" }}
+                          key={column.id}
+                          align={column.align}
+                        >
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
