@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -84,7 +84,7 @@ const RegisterForm = () => {
           />
         </div>
 
-        <button className="bg-yellow text-black p-3 w-[11rem] mt-10 m-auto">
+        <button className="bg-yellow text-black p-3 w-[11rem] mt-10 m-auto font-bold">
           Stwórz
         </button>
       </form>
