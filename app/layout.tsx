@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Merriweather } from "next/font/google";
+import QueryWrapper from "./components/QueryWrapper";
 
 export const metadata = {
   title: "Sql Project",
@@ -19,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${font.className}`}>{children}</body>
+      <body className={`${font.className}`}>
+        <QueryWrapper>{children}</QueryWrapper>
+      </body>
     </html>
   );
 }
