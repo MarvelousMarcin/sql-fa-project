@@ -23,10 +23,10 @@ model Address {
   number_domu   Int
   number_lokalu Int
   powiat        String
-  kraj          County @relation(fields: [id_kraju], references: [id])
+  kraj          Country @relation(fields: [id_kraju], references: [id])
 }
 
-model County {
+model Country {
   id        Int       @id @default(autoincrement())
   kraj      String
   kod_kraju String    @db.NVarChar(3) @unique

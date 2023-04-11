@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { useReducer } from "react";
+import Cookies from "js-cookie";
 // react.d.ts
 type CountProviderProps = { children: React.ReactNode };
 type State = {
@@ -16,7 +17,6 @@ type Action = {
   type: ActionKind;
   payload: any;
 };
-
 const Context = React.createContext<
   { state: State; dispatch: Dispatch } | undefined
 >(undefined);
@@ -32,9 +32,13 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-const initialState: State = { token: "", auth: false };
-
 const ContextProvider = ({ children }: CountProviderProps) => {
+  let initialState: State = { token: "", auth: false };
+  const token = Cookies.get("token");
+  if (token) {
+    initialState.token = token;
+    initialState.auth = true;
+  }
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
   return <Context.Provider value={value}>{children}</Context.Provider>;

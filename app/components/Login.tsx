@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "./ContextProvider";
 import { ActionKind } from "./ContextProvider";
+import Cookies from "js-cookie";
+
 type UserCredType = {
   login: string;
   password: string;
@@ -29,7 +31,7 @@ const Login = () => {
     onSuccess: (data) => {
       console.log(data);
       const token = data.data.token;
-      document.cookie = `token=${token}`;
+      Cookies.set("token", token);
       dispatch({ type: ActionKind.setToken, payload: token });
       dispatch({ type: ActionKind.setAuth, payload: true });
       router.push("/home");
