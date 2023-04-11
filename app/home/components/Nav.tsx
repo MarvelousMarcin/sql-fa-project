@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { delete_cookie } from "../func/cookies";
+
 const Nav = () => {
   const router = useRouter();
   return (
