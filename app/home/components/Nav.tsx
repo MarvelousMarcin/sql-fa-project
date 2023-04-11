@@ -6,7 +6,7 @@ const Nav = () => {
   const router = useRouter();
   return (
     <nav>
-      <ul className="flex flex-row justify-evenly gap-4">
+      <ul className="flex flex-row justify-evenly gap-12">
         <li>
           <Link href="/home">Faktury</Link>
         </li>
@@ -23,6 +23,7 @@ const Nav = () => {
           <Link href="/home/address">Adresy</Link>
         </li>
         <li
+          className="cursor-pointer"
           onClick={() => {
             delete_cookie("token");
             router.push("/");
