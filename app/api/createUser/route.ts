@@ -11,6 +11,13 @@ type User = {
 export async function POST(request: Request) {
   const data = (await request.json()) as User;
 
+  if (!data.email || !data.login || !data.password) {
+    return NextResponse.json(
+      { msg: "Żadne pole nie może być puste" },
+      { status: 401 }
+    );
+  }
+
   try {
     // change if email exist
     const isEmail = await prisma.user.findUnique({

@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type User = {
   login: string;
@@ -11,6 +12,7 @@ type User = {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [registerData, setRegisterData] = useState({
     login: "",
     email: "",
@@ -23,7 +25,11 @@ const RegisterForm = () => {
     },
     onError: (err: AxiosError<{ msg: string }>) => {
       const msg = err?.response?.data?.msg as string;
+      toast.dismiss();
       toast.error(msg);
+    },
+    onSuccess: () => {
+      router.push("/");
     },
   });
 
