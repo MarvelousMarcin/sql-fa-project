@@ -21,7 +21,7 @@ export default function Home() {
           Twórz faktury w sposób prosty i szybki. Pozwól nam zająć się resztą.
         </p>
         <Buttons />
-        <Image alt="" height={700} width={700} src={foto} />
+        <Image alt="" height={650} width={650} src={foto} />
       </section>
     </main>
   );
