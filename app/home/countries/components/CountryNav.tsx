@@ -5,8 +5,8 @@ import plus from "../../../assets/plus.svg";
 import trash from "../../../assets/trash.svg";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
-
-const CountryNav = ({ children }: { children: React.ReactNode }) => {
+import AddCountry from "./AddCountry";
+const CountryNav = () => {
   const [showBox, setShowBox] = useState(false);
 
   const addingCountryHandler = (e: FormEvent) => {
@@ -29,7 +29,7 @@ const CountryNav = ({ children }: { children: React.ReactNode }) => {
           transition={{ duration: 0.4 }}
           className="bg-white p-8 fixed top-1/2 left-1/2 rounded-md translate-x-[-50%] translate-y-[-50%] w-[30rem] h-[40rem] z-50"
         >
-          {children}
+          <AddCountry setShowBox={setShowBox} />
         </motion.section>
       )}
       <Image

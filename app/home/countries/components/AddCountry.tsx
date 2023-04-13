@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 type CountryType = {
@@ -9,12 +9,18 @@ type CountryType = {
   countryCode: string;
 };
 
-const AddCountry = () => {
+const AddCountry = ({ setShowBox }: { setShowBox: Function }) => {
   const [country, setCountry] = useState({ country: "", countryCode: "" });
+
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (newCountry: CountryType) => {
       return axios.post("/api/createCountry", newCountry);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["countries"] });
+      setShowBox(false);
     },
   });
 
