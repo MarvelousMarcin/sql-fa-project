@@ -37,7 +37,7 @@ const CountryTable = () => {
     queryFn: fetchCountries,
   });
 
-  if (isLoading) return <div>""</div>;
+  if (isLoading) return <div> </div>;
 
   return <CustomTable columns={columns} rows={data?.data} />;
 };
