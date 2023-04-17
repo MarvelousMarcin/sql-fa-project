@@ -127,7 +127,7 @@ const AddAddress = ({ setShowBox }: { setShowBox: Function }) => {
       </article>
       <button
         onClick={addCountryHandler}
-        className="bg-yellow px-5 py-2 text-black font-bold mt-5"
+        className="bg-yellow px-5 py-2 text-black font-bold mt-3"
       >
         Dodaj
       </button>

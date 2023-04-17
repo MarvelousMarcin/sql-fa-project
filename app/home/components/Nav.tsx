@@ -12,10 +12,10 @@ const Nav = () => {
           <Link href="/home">Faktury</Link>
         </li>
         <li>
-          <Link href="/home/fa">Podmioty</Link>
+          <Link href="/home/podmioty">Podmioty</Link>
         </li>
         <li>
-          <Link href="/home/fa">Klienci</Link>
+          <Link href="/home/clients">Klienci</Link>
         </li>
         <li>
           <Link href="/home/countries">Kraje</Link>

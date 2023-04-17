@@ -24,6 +24,8 @@ model Address {
   number_lokalu Int
   powiat        String
   kraj          Country @relation(fields: [id_kraju], references: [id])
+  podmioty      Podmiot[]
+  klienci       Klient[]
 }
 
 model Country {
@@ -31,4 +33,20 @@ model Country {
   kraj      String
   kod_kraju String    @db.NVarChar(3) @unique
   adresy    Address[]
+}
+
+model Podmiot {
+  id        Int       @id @default(autoincrement())
+  nip       String
+  nazwa     String
+  id_adresu Int
+  adres     Address   @relation(fields: [id_adresu], references: [id])
+}
+
+model Klient {
+  id        Int       @id @default(autoincrement())
+  nip       String
+  nazwa     String
+  id_adresu Int
+  adres     Address   @relation(fields: [id_adresu], references: [id])
 }
