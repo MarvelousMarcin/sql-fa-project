@@ -2,10 +2,9 @@
 
 import Image from "next/image";
 import plus from "../../../assets/plus.svg";
-import trash from "../../../assets/trash.svg";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
-import AddClient from "../../clients/components/AddClient";
+import AddProduct from "./AddProduct";
 const ProductsNav = () => {
   const [showBox, setShowBox] = useState(false);
 
@@ -29,7 +28,7 @@ const ProductsNav = () => {
           transition={{ duration: 0.4 }}
           className="bg-white p-8 fixed top-1/2 left-1/2 rounded-md translate-x-[-50%] translate-y-[-50%] w-[30rem] h-[40rem] z-50"
         >
-          <AddClient setShowBox={setShowBox} />
+          <AddProduct setShowBox={setShowBox} />
         </motion.section>
       )}
       <Image

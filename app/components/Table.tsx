@@ -26,7 +26,7 @@ export default function CustomTable({ rows, columns }) {
   };
 
   return (
-    <Paper sx={{ width: "80%", overflow: "hidden" }}>
+    <Paper sx={{ width: "80%", overflowX: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
