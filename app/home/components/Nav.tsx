@@ -12,6 +12,9 @@ const Nav = () => {
           <Link href="/home">Faktury</Link>
         </li>
         <li>
+          <Link href="/home/products">Products</Link>
+        </li>
+        <li>
           <Link href="/home/clients">Klienci</Link>
         </li>
         <li>

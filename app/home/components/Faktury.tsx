@@ -2,24 +2,6 @@ const Faktury = () => {
   return (
     <main className="w-[90%]">
       <form className="flex flex-col gap-11 justify-evenly ">
-        <article>
-          <h1 className="font-bold text-2xl">Klient</h1>
-          <section>
-            <h2>Id klienta</h2>
-            <input className="outline-none border-2 border-black rounded-md px-2 py-1 w-full" />
-          </section>
-        </article>
-        <article>
-          <h1 className="font-bold text-2xl">Podmiot</h1>
-          <section>
-            <h2>NIP</h2>
-            <input className="outline-none border-2 border-black rounded-md px-2 py-1 w-full" />
-          </section>
-          <section>
-            <h2>Id Adresu</h2>
-            <input className="outline-none border-2 border-black rounded-md px-2 py-1 w-full" />
-          </section>
-        </article>
         <article className="flex flex-col gap-4">
           <h1 className="font-bold text-2xl">Produkty</h1>
           <section>

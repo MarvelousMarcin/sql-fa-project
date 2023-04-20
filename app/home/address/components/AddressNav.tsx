@@ -40,13 +40,6 @@ const AddressNav = () => {
         width={25}
         height={25}
       />
-      <Image
-        className="cursor-pointer"
-        alt=""
-        src={trash}
-        width={25}
-        height={25}
-      />
     </nav>
   );
 };

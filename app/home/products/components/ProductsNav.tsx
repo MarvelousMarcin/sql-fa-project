@@ -5,8 +5,8 @@ import plus from "../../../assets/plus.svg";
 import trash from "../../../assets/trash.svg";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
-import AddClient from "./AddClient";
-const ClientNav = () => {
+import AddClient from "../../clients/components/AddClient";
+const ProductsNav = () => {
   const [showBox, setShowBox] = useState(false);
 
   const addingCountryHandler = (e: FormEvent) => {
@@ -44,4 +44,4 @@ const ClientNav = () => {
   );
 };
 
-export default ClientNav;
+export default ProductsNav;
