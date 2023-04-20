@@ -12,6 +12,7 @@ model User {
   login     String  @unique
   email     String  @unique
   password  String 
+  logi      Log[]
 }
 
 model Address {
@@ -49,4 +50,31 @@ model Klient {
   nazwa     String
   id_adresu Int
   adres     Address   @relation(fields: [id_adresu], references: [id])
+}
+
+model Log {
+  id        Int       @id @default(autoincrement())
+  log       String
+  createdAt DateTime @default(now())
+  authorId  Int?
+  author    User?    @relation(fields: [authorId], references: [id])
+}
+
+model Produkt {
+  id          Int       @id @default(autoincrement())
+  nazwa       String
+  netto       Float 
+  brutto      Float 
+  faktura     Faktura?  @relation(fields: [faktura_id], references: [id])
+  faktura_id  Int? 
+  createdAt   DateTime  @default(now())  
+}
+
+model Faktura {
+  id            Int       @id @default(autoincrement())
+  id_klienta    Int
+  nip           String
+  id_adresu     Int
+  produkty      Produkt[]
+  createdAt     DateTime @default(now())
 }

@@ -1,8 +1,13 @@
-"use client";
-
-import { useUserContext } from "../components/ContextProvider";
-
+import FakturyNav from "./components/FakturyNav";
+import Faktury from "./components/Faktury";
 export default function Home() {
-  const { state } = useUserContext();
-  return <main></main>;
+  return (
+    <main className="flex justify-start items-center flex-col h-[59vh] ">
+      <header className="flex flex-row justify-between w-[80vw] mt-10">
+        <h1 className="font-bold text-2xl">Faktury</h1>
+        <FakturyNav />
+      </header>
+      <Faktury />
+    </main>
+  );
 }

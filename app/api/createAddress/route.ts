@@ -29,6 +29,11 @@ export async function POST(request: Request) {
       number_lokalu: data.number_lokalu,
     },
   });
+  await prisma.log.create({
+    data: {
+      log: `Stworzono nowy adres: ${data.kod_pocztowy} ${data.number_domu} ${data.powiat} ${data.ulica} ${data.wojewodztwo}`,
+    },
+  });
 
   return NextResponse.json(newAddress, { status: 200 });
 }

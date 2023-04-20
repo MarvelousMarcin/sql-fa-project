@@ -12,6 +12,9 @@ export async function POST(request: Request) {
   const data = (await request.json()) as User;
 
   if (!data.email || !data.login || !data.password) {
+    await prisma.log.create({
+      data: { log: "Żadne pole nie może być puste przy tworzeniu użytkownika" },
+    });
     return NextResponse.json(
       { msg: "Żadne pole nie może być puste" },
       { status: 401 }
@@ -25,6 +28,9 @@ export async function POST(request: Request) {
     });
 
     if (isEmail) {
+      await prisma.log.create({
+        data: { log: "Użytkownik o takim mailu już istnieje" },
+      });
       return NextResponse.json(
         { msg: "Użytkownik o takim mailu już istnieje" },
         { status: 401 }
@@ -37,6 +43,9 @@ export async function POST(request: Request) {
     });
 
     if (isLogin) {
+      await prisma.log.create({
+        data: { log: "Użytkownik o takim loginie już istnieje" },
+      });
       return NextResponse.json(
         { msg: "Użytkownik o takim loginie już istnieje" },
         { status: 402 }
