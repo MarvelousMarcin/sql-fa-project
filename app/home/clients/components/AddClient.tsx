@@ -36,7 +36,7 @@ const AddClient = ({ setShowBox }: { setShowBox: Function }) => {
 
   return (
     <>
-      <h1 className="font-bold text-2xl mb-10">Dodaj kraj</h1>
+      <h1 className="font-bold text-2xl mb-10">Dodaj klienta</h1>
       <article className="flex flex-col justify-start gap-10 overflow-y-scroll h-[30rem]">
         <section>
           <p className="font-bold">NIP:</p>

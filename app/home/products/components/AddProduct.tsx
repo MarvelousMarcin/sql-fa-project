@@ -33,7 +33,7 @@ const AddProduct = ({ setShowBox }: { setShowBox: Function }) => {
 
   return (
     <>
-      <h1 className="font-bold text-2xl mb-10">Dodaj kraj</h1>
+      <h1 className="font-bold text-2xl mb-10">Dodaj produkt</h1>
       <article className="flex flex-col justify-evenly gap-10">
         <section>
           <p className="font-bold">Nazwa:</p>
