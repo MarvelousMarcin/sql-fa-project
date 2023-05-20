@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type Product = {
   name: string;
@@ -27,7 +28,15 @@ const AddProduct = ({ setShowBox }: { setShowBox: Function }) => {
 
   const addCountryHandler = (e: FormEvent) => {
     e.preventDefault();
-    console.log(country);
+    console.log(country.brutto);
+    if (Number(country.brutto) < 0) {
+      toast.error("Cena nie może być mniejsza od zera");
+      return;
+    }
+    if (Number(country.netto) < 0) {
+      toast.error("Cena nie może być mniejsza od zera");
+      return;
+    }
     mutation.mutate(country);
   };
 

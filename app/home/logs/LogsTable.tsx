@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 interface Column {
-  id: "id" | "nazwa" | "netto" | "brutto";
+  id: "id" | "log" | "createdAt";
   label: string;
   minWidth?: number;
   align?: "right";
@@ -14,34 +14,27 @@ interface Column {
 
 const columns: Column[] = [
   { id: "id", label: "Id", minWidth: 50 },
-  { id: "nazwa", label: "Nazwa", minWidth: 50 },
+  { id: "log", label: "Log", minWidth: 50 },
   {
-    id: "netto",
-    label: "Netto",
-    minWidth: 50,
-  },
-  {
-    id: "brutto",
-    label: "Brutto",
+    id: "createdAt",
+    label: "Stworzono",
     minWidth: 50,
   },
 ];
 
-const ProductsTable = ({ deleting }) => {
+const LogsTable = () => {
   const fetchCountries = () => {
-    return axios.get("/api/getProducts");
+    return axios.get("/api/getLogs");
   };
 
   const { isLoading, isError, data, error } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["countries"],
     queryFn: fetchCountries,
   });
 
   if (isLoading) return <div> </div>;
 
-  return (
-    <CustomTable columns={columns} rows={data?.data} deleting={deleting} />
-  );
+  return <CustomTable columns={columns} rows={data?.data} />;
 };
 
-export default ProductsTable;
+export default LogsTable;

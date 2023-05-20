@@ -9,8 +9,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import axios from "axios";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function CustomTable({ rows, columns }) {
+export default function CustomTable({ rows, columns, deleting = false }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -24,6 +26,8 @@ export default function CustomTable({ rows, columns }) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const queryClient = useQueryClient();
 
   return (
     <Paper sx={{ width: "80%", overflowX: "hidden" }}>
@@ -52,8 +56,19 @@ export default function CustomTable({ rows, columns }) {
               .map((row, index) => {
                 return (
                   <TableRow
+                    onClick={async (e) => {
+                      if (deleting) {
+                        const id = e.target.parentNode.childNodes[0].innerHTML;
+                        console.log(id);
+                        await axios.post("/api/deleteProduct", {
+                          data: { id },
+                        });
+                        queryClient.invalidateQueries("products");
+                      }
+                    }}
                     style={{
                       backgroundColor: index % 2 === 0 ? "#FFF7DD" : "white",
+                      position: "relative",
                     }}
                     hover
                     role="checkbox"
@@ -63,15 +78,17 @@ export default function CustomTable({ rows, columns }) {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell
-                          style={{ fontFamily: "var(--font-merriweather)" }}
-                          key={column.id}
-                          align={column.align}
-                        >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
+                        <>
+                          <TableCell
+                            style={{ fontFamily: "var(--font-merriweather)" }}
+                            key={column.id}
+                            align={column.align}
+                          >
+                            {column.format && typeof value === "number"
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        </>
                       );
                     })}
                   </TableRow>

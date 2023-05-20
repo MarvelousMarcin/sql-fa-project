@@ -23,6 +23,9 @@ const Nav = () => {
         <li>
           <Link href="/home/address">Adresy</Link>
         </li>
+        <li>
+          <Link href="/home/logs">Logi</Link>
+        </li>
         <li
           className="cursor-pointer"
           onClick={() => {

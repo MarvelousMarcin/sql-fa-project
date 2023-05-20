@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type ClientType = {
   nip: string;
@@ -31,6 +32,9 @@ const AddClient = ({ setShowBox }: { setShowBox: Function }) => {
 
   const addCountryHandler = (e: FormEvent) => {
     e.preventDefault();
+    if (client.nip.length !== 10) {
+      toast.error("Nip musi mieć długość 11");
+    }
     mutation.mutate(client);
   };
 

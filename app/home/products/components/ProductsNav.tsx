@@ -5,7 +5,12 @@ import plus from "../../../assets/plus.svg";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import AddProduct from "./AddProduct";
-const ProductsNav = () => {
+
+type ProductNavType = {
+  setDeleting: (param: ({}) => {}) => void;
+};
+
+const ProductsNav = ({ setDeleting, deleting }: ProductNavType) => {
   const [showBox, setShowBox] = useState(false);
 
   const addingCountryHandler = (e: FormEvent) => {
@@ -31,14 +36,27 @@ const ProductsNav = () => {
           <AddProduct setShowBox={setShowBox} />
         </motion.section>
       )}
-      <Image
-        onClick={addingCountryHandler}
-        className="cursor-pointer"
-        alt=""
-        src={plus}
-        width={25}
-        height={25}
-      />
+      <section className="flex items-center justify-center gap-3">
+        <div
+          style={{ color: deleting ? "red" : "black" }}
+          className="cursor-pointer"
+          onClick={() =>
+            setDeleting((prev) => {
+              return !prev;
+            })
+          }
+        >
+          Delete
+        </div>
+        <Image
+          onClick={addingCountryHandler}
+          className="cursor-pointer"
+          alt=""
+          src={plus}
+          width={25}
+          height={25}
+        />
+      </section>
     </nav>
   );
 };

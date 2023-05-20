@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type CountryType = {
   country: string;
@@ -26,6 +27,9 @@ const AddCountry = ({ setShowBox }: { setShowBox: Function }) => {
 
   const addCountryHandler = (e: FormEvent) => {
     e.preventDefault();
+    if (country.countryCode.length !== 3) {
+      toast.error("Kod kraju musi mieć 3 cyfry");
+    }
     mutation.mutate(country);
   };
 
