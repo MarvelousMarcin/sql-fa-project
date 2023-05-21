@@ -55,7 +55,7 @@ const columns: Column[] = [
   },
 ];
 
-const AddressTable = () => {
+const AddressTable = ({ setData }) => {
   const fetchAddr = () => {
     return axios.get("/api/getAddresses");
   };
@@ -66,11 +66,11 @@ const AddressTable = () => {
   });
 
   if (isLoading) return <div> </div>;
+  setData(data?.data);
   const newAddr = data?.data.map((elem) => {
-    console.log(elem);
     return { ...elem, kraj: elem.kraj.kraj };
   });
-  console.log(newAddr);
+
   return <CustomTable columns={columns} rows={newAddr} />;
 };
 
