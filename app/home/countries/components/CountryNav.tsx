@@ -8,7 +8,7 @@ import AddCountry from "./AddCountry";
 import SelectKraj from "./SelectCountry";
 import TextField from "@mui/material/TextField";
 
-const CountryNav = ({ setFilter }) => {
+const CountryNav = ({ setFilter, data }) => {
   const [showBox, setShowBox] = useState(false);
 
   const addingCountryHandler = (e: FormEvent) => {
@@ -35,6 +35,40 @@ const CountryNav = ({ setFilter }) => {
         </motion.section>
       )}
       <section className="flex justify-center items-center">
+        <a id="downloadData" style={{ display: "none" }}></a>
+
+        <button
+          onClick={() => {
+            const doc = document.implementation.createDocument("", "", null);
+            const productsElem = doc.createElement("countries");
+            console.log(data);
+            data.forEach((country) => {
+              var productElem1 = doc.createElement("country");
+              productElem1.setAttribute("id", country.id);
+              productElem1.setAttribute("kraj", country.kraj);
+              productElem1.setAttribute("kod_kraju", country.kod_kraju);
+              productsElem.appendChild(productElem1);
+            });
+            doc.appendChild(productsElem);
+
+            var serializer = new XMLSerializer();
+            var docString = serializer.serializeToString(doc);
+            console.log(docString);
+            const content = `<?xml version="1.0" encoding="utf-8"?><!DOCTYPE root>
+    ${docString}
+    `;
+            let downloadData = document.getElementById("downloadData");
+            downloadData?.setAttribute(
+              "href",
+              "data:text/application/xml;charset=utf-8," +
+                encodeURIComponent(content)
+            );
+            downloadData?.setAttribute("download", "countries.xml");
+            downloadData?.click();
+          }}
+        >
+          Export
+        </button>
         <SelectKraj setFilter={setFilter} />
         <TextField
           id="outlined-basic"

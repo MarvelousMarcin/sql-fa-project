@@ -10,7 +10,7 @@ type ProductNavType = {
   setDeleting: (param: ({}) => {}) => void;
 };
 
-const ProductsNav = ({ setDeleting, deleting }: ProductNavType) => {
+const ProductsNav = ({ setDeleting, deleting, data }: ProductNavType) => {
   const [showBox, setShowBox] = useState(false);
 
   const addingCountryHandler = (e: FormEvent) => {
@@ -36,7 +36,42 @@ const ProductsNav = ({ setDeleting, deleting }: ProductNavType) => {
           <AddProduct setShowBox={setShowBox} />
         </motion.section>
       )}
-      <section className="flex items-center justify-center gap-3">
+      <section className="flex items-center justify-center gap-6">
+        <a id="downloadData" style={{ display: "none" }}></a>
+        <button
+          onClick={() => {
+            const doc = document.implementation.createDocument("", "", null);
+            const productsElem = doc.createElement("products");
+            console.log(data);
+            data.forEach((product) => {
+              var productElem1 = doc.createElement("product");
+              productElem1.setAttribute("id", product.id);
+              productElem1.setAttribute("name", product.nazwa);
+              productElem1.setAttribute("netto", product.netto);
+              productElem1.setAttribute("brutto", product.brutto);
+              productElem1.setAttribute("createdAt", product.createdAt);
+              productsElem.appendChild(productElem1);
+            });
+            doc.appendChild(productsElem);
+
+            var serializer = new XMLSerializer();
+            var docString = serializer.serializeToString(doc);
+            console.log(docString);
+            const content = `<?xml version="1.0" encoding="utf-8"?><!DOCTYPE root>
+    ${docString}
+    `;
+            let downloadData = document.getElementById("downloadData");
+            downloadData?.setAttribute(
+              "href",
+              "data:text/application/xml;charset=utf-8," +
+                encodeURIComponent(content)
+            );
+            downloadData?.setAttribute("download", "products.xml");
+            downloadData?.click();
+          }}
+        >
+          Export
+        </button>
         <div
           style={{ color: deleting ? "red" : "black" }}
           className="cursor-pointer"

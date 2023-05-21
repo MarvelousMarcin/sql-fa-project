@@ -27,7 +27,7 @@ const columns: Column[] = [
   },
 ];
 
-const ProductsTable = ({ deleting }) => {
+const ProductsTable = ({ deleting, setData }) => {
   const fetchCountries = () => {
     return axios.get("/api/getProducts");
   };
@@ -38,7 +38,7 @@ const ProductsTable = ({ deleting }) => {
   });
 
   if (isLoading) return <div> </div>;
-
+  setData(data?.data);
   return (
     <CustomTable columns={columns} rows={data?.data} deleting={deleting} />
   );

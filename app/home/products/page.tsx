@@ -5,13 +5,19 @@ import ProductsTable from "./components/ProductsTable";
 import { useState } from "react";
 export default function Home() {
   const [deleting, setDeleting] = useState(false);
+  const [data, setData] = useState([]);
+
   return (
     <main className="flex justify-center items-center flex-col h-[59vh] ">
       <header className="flex flex-row justify-between w-[80vw] mb-10">
         <h1 className="font-bold text-2xl">Produkty</h1>
-        <ProductsNav setDeleting={setDeleting} deleting={deleting} />
+        <ProductsNav
+          setDeleting={setDeleting}
+          deleting={deleting}
+          data={data}
+        />
       </header>
-      <ProductsTable deleting={deleting} />
+      <ProductsTable deleting={deleting} setData={setData} />
     </main>
   );
 }

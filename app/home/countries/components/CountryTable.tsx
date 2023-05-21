@@ -29,7 +29,7 @@ type CountryTableType = {
   };
 };
 
-const CountryTable = ({ filter }: CountryTableType) => {
+const CountryTable = ({ filter, setData }: CountryTableType) => {
   const fetchCountries = () => {
     return axios.get("/api/getCountries");
   };
@@ -40,7 +40,6 @@ const CountryTable = ({ filter }: CountryTableType) => {
   });
 
   if (isLoading) return <div> </div>;
-  console.log(data?.data);
   let filteredData;
   if (filter.name !== "" && filter.value !== "") {
     filteredData = data?.data.filter((item) => {
@@ -48,6 +47,7 @@ const CountryTable = ({ filter }: CountryTableType) => {
     });
   } else {
     filteredData = data?.data;
+    setData(filteredData);
   }
   return <CustomTable columns={columns} rows={filteredData} />;
 };
