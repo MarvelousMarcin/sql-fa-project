@@ -22,12 +22,14 @@ const columns: Column[] = [
   },
 ];
 
-interface Data {
-  id: number;
-  kod_kraju: string;
-  countryCode: string;
-}
-const CountryTable = () => {
+type CountryTableType = {
+  filter: {
+    name: string;
+    value: string;
+  };
+};
+
+const CountryTable = ({ filter }: CountryTableType) => {
   const fetchCountries = () => {
     return axios.get("/api/getCountries");
   };
@@ -38,8 +40,16 @@ const CountryTable = () => {
   });
 
   if (isLoading) return <div> </div>;
-
-  return <CustomTable columns={columns} rows={data?.data} />;
+  console.log(data?.data);
+  let filteredData;
+  if (filter.name !== "" && filter.value !== "") {
+    filteredData = data?.data.filter((item) => {
+      return item[filter.name] == filter.value;
+    });
+  } else {
+    filteredData = data?.data;
+  }
+  return <CustomTable columns={columns} rows={filteredData} />;
 };
 
 export default CountryTable;

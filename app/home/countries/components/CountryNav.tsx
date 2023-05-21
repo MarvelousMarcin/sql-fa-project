@@ -1,12 +1,14 @@
 "use client";
-
+import * as React from "react";
 import Image from "next/image";
 import plus from "../../../assets/plus.svg";
-import trash from "../../../assets/trash.svg";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import AddCountry from "./AddCountry";
-const CountryNav = () => {
+import SelectKraj from "./SelectCountry";
+import TextField from "@mui/material/TextField";
+
+const CountryNav = ({ setFilter }) => {
   const [showBox, setShowBox] = useState(false);
 
   const addingCountryHandler = (e: FormEvent) => {
@@ -32,6 +34,19 @@ const CountryNav = () => {
           <AddCountry setShowBox={setShowBox} />
         </motion.section>
       )}
+      <section className="flex justify-center items-center">
+        <SelectKraj setFilter={setFilter} />
+        <TextField
+          id="outlined-basic"
+          label=""
+          variant="outlined"
+          onChange={(e) =>
+            setFilter((prev) => {
+              return { ...prev, value: e.target.value };
+            })
+          }
+        />
+      </section>
       <Image
         onClick={addingCountryHandler}
         className="cursor-pointer"
